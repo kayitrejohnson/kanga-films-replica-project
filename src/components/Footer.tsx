@@ -30,7 +30,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">About Us</a></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">+250 788 821 628</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">mnyigangadriver@gmail.com</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">kjohnsonkayitare@gmail.com</a></li>
             </ul>
           </div>
 
@@ -41,14 +41,14 @@ const Footer = () => {
               href="https://wa.me/250788821628" 
               className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-block"
             >
-              OSHAkur
+              KANGA
             </a>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            Copyright © 2025 OSHAkur Films. All Rights Reserved.
+            Copyright © 2025 KANGA Films. All Rights Reserved.
           </p>
           <p className="text-gray-500 text-sm mt-2">
             Privacy Policy and Terms & Conditions
