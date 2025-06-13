@@ -2,6 +2,7 @@
 import { useParams } from "react-router-dom";
 import { Play, Download, Star, Calendar, Clock } from "lucide-react";
 import Navigation from "../components/Navigation";
+import VideoPlayer from "../components/VideoPlayer";
 
 const MovieDetail = () => {
   const { id } = useParams();
@@ -20,6 +21,8 @@ const MovieDetail = () => {
     director: "Antoine Fuqua",
     cast: ["Denzel Washington", "Dakota Fanning", "Eugenio Mastrandrea"]
   };
+
+  const videoUrl = "https://www.mediafire.com/file/e9itfcozop8cmd6/Deputy_E11.mp4/file";
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -93,6 +96,12 @@ const MovieDetail = () => {
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Video Player Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h2 className="text-white text-2xl font-bold mb-6">Watch {movie.title}</h2>
+        <VideoPlayer videoUrl={videoUrl} title={movie.title} />
       </div>
       
       {/* Comments Section */}

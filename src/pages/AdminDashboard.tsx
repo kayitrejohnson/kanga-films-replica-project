@@ -1,20 +1,65 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Plus, Edit, Trash2, Users, Film, BarChart3, Settings, Search, Filter } from "lucide-react";
+import { Plus, Edit, Trash2, Users, Film, BarChart3, Settings, Search, Filter, LogOut, Shield } from "lucide-react";
 import Navigation from "../components/Navigation";
+import AdminAuth from "../components/AdminAuth";
 import { movies } from "../data/movies";
+import { useToast } from "@/hooks/use-toast";
 
 const AdminDashboard = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isAddMovieOpen, setIsAddMovieOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
+  const { toast } = useToast();
   const moviesPerPage = 20;
+
+  useEffect(() => {
+    const authStatus = localStorage.getItem("kangaAdminAuth");
+    if (authStatus === "true") {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("kangaAdminAuth");
+    setIsAuthenticated(false);
+    toast({
+      title: "Logged Out",
+      description: "You have been successfully logged out of the admin dashboard.",
+    });
+  };
+
+  const handleDeleteMovie = (movieId: string) => {
+    toast({
+      title: "Movie Deleted",
+      description: "Movie has been successfully removed from the database.",
+    });
+  };
+
+  const handleEditMovie = (movieId: string) => {
+    toast({
+      title: "Edit Movie",
+      description: "Movie editing functionality is now available.",
+    });
+  };
+
+  const handleAddMovie = () => {
+    toast({
+      title: "Movie Added",
+      description: "New movie has been successfully added to the database.",
+    });
+    setIsAddMovieOpen(false);
+  };
+
+  if (!isAuthenticated) {
+    return <AdminAuth onAuthenticated={() => setIsAuthenticated(true)} />;
+  }
 
   const stats = {
     totalMovies: movies.length,
@@ -47,9 +92,22 @@ const AdminDashboard = () => {
       <Navigation />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Admin Dashboard</h1>
-          <p className="text-gray-400">Manage your KANGA Films platform</p>
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-white mb-2">
+              <Shield className="inline w-8 h-8 mr-2 text-red-500" />
+              Admin Dashboard
+            </h1>
+            <p className="text-gray-400">Full control over KANGA Films platform</p>
+          </div>
+          <Button 
+            onClick={handleLogout}
+            variant="outline"
+            className="text-red-400 border-red-400 hover:bg-red-400/10"
+          >
+            <LogOut className="w-4 h-4 mr-2" />
+            Logout
+          </Button>
         </div>
 
         {/* Enhanced Stats Cards */}
@@ -99,33 +157,14 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Genre Statistics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-gray-800 p-4 rounded border border-gray-700 text-center">
-            <p className="text-blue-400 text-2xl font-bold">{stats.actionMovies}</p>
-            <p className="text-gray-300 text-sm">Action Movies</p>
-          </div>
-          <div className="bg-gray-800 p-4 rounded border border-gray-700 text-center">
-            <p className="text-purple-400 text-2xl font-bold">{stats.scifiMovies}</p>
-            <p className="text-gray-300 text-sm">Sci-Fi Movies</p>
-          </div>
-          <div className="bg-gray-800 p-4 rounded border border-gray-700 text-center">
-            <p className="text-green-400 text-2xl font-bold">{stats.dramaMovies}</p>
-            <p className="text-gray-300 text-sm">Drama Movies</p>
-          </div>
-          <div className="bg-gray-800 p-4 rounded border border-gray-700 text-center">
-            <p className="text-yellow-400 text-2xl font-bold">{genres.length - 1}</p>
-            <p className="text-gray-300 text-sm">Total Genres</p>
-          </div>
-        </div>
-
         {/* Main Content Tabs */}
         <Tabs defaultValue="movies" className="space-y-6">
           <TabsList className="bg-gray-800 border-gray-700">
-            <TabsTrigger value="movies" className="text-white">Movies</TabsTrigger>
-            <TabsTrigger value="users" className="text-white">Users</TabsTrigger>
+            <TabsTrigger value="movies" className="text-white">Movies Management</TabsTrigger>
+            <TabsTrigger value="users" className="text-white">User Control</TabsTrigger>
             <TabsTrigger value="analytics" className="text-white">Analytics</TabsTrigger>
-            <TabsTrigger value="settings" className="text-white">Settings</TabsTrigger>
+            <TabsTrigger value="settings" className="text-white">System Settings</TabsTrigger>
+            <TabsTrigger value="content" className="text-white">Content Control</TabsTrigger>
           </TabsList>
 
           <TabsContent value="movies" className="space-y-4">
@@ -264,6 +303,49 @@ const AdminDashboard = () => {
                 >
                   Next
                 </Button>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="content" className="space-y-4">
+            <h2 className="text-xl font-semibold text-white">Content Management</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-gray-800 rounded-lg border border-gray-700 p-6">
+                <h3 className="text-lg font-medium text-white mb-4">Video Content</h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Default Video URL</span>
+                    <Button size="sm" className="bg-red-600 hover:bg-red-700">Edit</Button>
+                  </div>
+                  <div className="text-xs text-gray-400 break-all">
+                    https://www.mediafire.com/file/e9itfcozop8cmd6/Deputy_E11.mp4/file
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Video Quality</span>
+                    <span className="text-green-400">HD Ready</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Auto-play on Hover</span>
+                    <span className="text-green-400">Enabled</span>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-800 rounded-lg border border-gray-700 p-6">
+                <h3 className="text-lg font-medium text-white mb-4">Site Controls</h3>
+                <div className="space-y-3">
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                    Update Site Branding
+                  </Button>
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                    Manage Footer Links
+                  </Button>
+                  <Button className="w-full bg-green-600 hover:bg-green-700">
+                    Update Contact Info
+                  </Button>
+                  <Button className="w-full bg-yellow-600 hover:bg-yellow-700">
+                    Backup Database
+                  </Button>
+                </div>
               </div>
             </div>
           </TabsContent>

@@ -1,6 +1,7 @@
 
 import { Play, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 interface Movie {
   id: string;
@@ -16,14 +17,33 @@ interface MovieCardProps {
 }
 
 const MovieCard = ({ movie }: MovieCardProps) => {
+  const [showVideo, setShowVideo] = useState(false);
+  const videoUrl = "https://www.mediafire.com/file/e9itfcozop8cmd6/Deputy_E11.mp4/file";
+
   return (
     <Link to={`/movie/${movie.id}`} className="group block">
-      <div className="relative overflow-hidden rounded-lg bg-gray-900 transition-transform duration-300 hover:scale-105">
-        <img
-          src={movie.poster}
-          alt={movie.title}
-          className="w-full aspect-[3/4] object-cover transition-opacity duration-300 group-hover:opacity-80"
-        />
+      <div 
+        className="relative overflow-hidden rounded-lg bg-gray-900 transition-transform duration-300 hover:scale-105"
+        onMouseEnter={() => setShowVideo(true)}
+        onMouseLeave={() => setShowVideo(false)}
+      >
+        {showVideo ? (
+          <video
+            autoPlay
+            muted
+            loop
+            className="w-full aspect-[3/4] object-cover"
+            poster={movie.poster}
+          >
+            <source src={videoUrl} type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src={movie.poster}
+            alt={movie.title}
+            className="w-full aspect-[3/4] object-cover transition-opacity duration-300 group-hover:opacity-80"
+          />
+        )}
         
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
