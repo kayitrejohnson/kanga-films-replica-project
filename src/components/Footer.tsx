@@ -29,20 +29,29 @@ const Footer = () => {
             <h3 className="text-white font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">+250 788 821 628</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">kjohnsonkayitare@gmail.com</a></li>
+              <li><a href="tel:+250795990130" className="text-gray-400 hover:text-white transition-colors">+250 795 990 130</a></li>
+              <li><a href="tel:+250721708448" className="text-gray-400 hover:text-white transition-colors">+250 721 708 448</a></li>
+              <li><a href="mailto:kjohnsonkayitare@gmail.com" className="text-gray-400 hover:text-white transition-colors">kjohnsonkayitare@gmail.com</a></li>
             </ul>
           </div>
 
           {/* WhatsApp */}
           <div>
             <h3 className="text-white font-semibold mb-4">WhatsApp</h3>
-            <a 
-              href="https://wa.me/250788821628" 
-              className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-block"
-            >
-              KANGA
-            </a>
+            <div className="space-y-2">
+              <a 
+                href="https://wa.me/250795990130" 
+                className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-block w-full text-center"
+              >
+                Chat: +250 795 990 130
+              </a>
+              <a 
+                href="https://wa.me/250721708448" 
+                className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors inline-block w-full text-center"
+              >
+                Chat: +250 721 708 448
+              </a>
+            </div>
           </div>
         </div>
 
