@@ -20,21 +20,26 @@ interface MovieGridProps {
 const MovieGrid = ({ title, movies }: MovieGridProps) => {
   const [showAll, setShowAll] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const moviesPerPage = 24; // 4 rows x 6 columns on large screens
+  const moviesPerPage = 30; // Increased for better performance with 1000+ movies
   
   const displayedMovies = showAll 
     ? movies.slice(0, currentPage * moviesPerPage)
-    : movies.slice(0, 12); // Show 12 initially (2 rows)
+    : movies.slice(0, 18); // Show 18 initially (3 rows)
 
   const hasMoreMovies = movies.length > displayedMovies.length;
 
   const loadMore = () => {
     if (!showAll) {
       setShowAll(true);
-      setCurrentPage(2); // Start from page 2 since we already show some movies
+      setCurrentPage(2);
     } else {
       setCurrentPage(prev => prev + 1);
     }
+  };
+
+  const showLess = () => {
+    setShowAll(false);
+    setCurrentPage(1);
   };
 
   return (
@@ -52,8 +57,8 @@ const MovieGrid = ({ title, movies }: MovieGridProps) => {
         ))}
       </div>
       
-      {hasMoreMovies && (
-        <div className="text-center mt-8">
+      <div className="text-center mt-8 space-x-4">
+        {hasMoreMovies && (
           <Button 
             onClick={loadMore}
             variant="outline"
@@ -61,8 +66,18 @@ const MovieGrid = ({ title, movies }: MovieGridProps) => {
           >
             Load More Movies ({movies.length - displayedMovies.length} remaining)
           </Button>
-        </div>
-      )}
+        )}
+        
+        {showAll && displayedMovies.length > 18 && (
+          <Button 
+            onClick={showLess}
+            variant="outline"
+            className="bg-gray-700 border-gray-500 text-white hover:bg-gray-600"
+          >
+            Show Less
+          </Button>
+        )}
+      </div>
     </section>
   );
 };

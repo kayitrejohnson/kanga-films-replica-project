@@ -1,6 +1,6 @@
 
-export const movies = [
-  // Action Movies
+// Action Movies
+const baseMovies = [
   {
     id: "1",
     title: "The Equalizer 3",
@@ -291,33 +291,53 @@ export const movies = [
 
 // Generate more movies programmatically to reach 1000+ movies
 const generateMoreMovies = () => {
-  const genres = ["Action", "Sci-Fi", "Drama", "Thriller", "Comedy", "Horror", "Romance"];
-  const baseMovies = [];
+  const genres = ["Action", "Sci-Fi", "Drama", "Thriller", "Comedy", "Horror", "Romance", "Adventure", "Fantasy", "Mystery"];
+  const movieTitles = [
+    "Dark Phoenix", "The Matrix", "Inception", "Gladiator", "Titanic", "Avatar", "Pulp Fiction", 
+    "The Dark Knight", "Forrest Gump", "Fight Club", "Goodfellas", "The Lord of the Rings",
+    "Star Wars", "Jurassic Park", "Terminator", "Alien", "Predator", "Rocky", "Rambo",
+    "Die Hard", "Lethal Weapon", "Speed", "Heat", "Casino", "Scarface", "The Departed",
+    "Shutter Island", "The Prestige", "Memento", "Interstellar", "Gravity", "Mad Max",
+    "Blade Runner", "The Fifth Element", "Total Recall", "Minority Report", "I Am Legend",
+    "World War Z", "Zombieland", "The Walking Dead", "Game of Thrones", "Breaking Bad",
+    "The Sopranos", "Lost", "Prison Break", "24", "Heroes", "Dexter", "House of Cards",
+    "Stranger Things", "The Witcher", "Mandalorian", "House of the Dragon", "Rings of Power"
+  ];
   
-  for (let i = 36; i <= 1000; i++) {
+  const additionalMovies = [];
+  
+  for (let i = 36; i <= 1200; i++) {
     const genre = genres[Math.floor(Math.random() * genres.length)];
-    const year = 2015 + Math.floor(Math.random() * 9); // Random year between 2015-2023
+    const baseTitle = movieTitles[Math.floor(Math.random() * movieTitles.length)];
+    const year = 2010 + Math.floor(Math.random() * 14); // Random year between 2010-2023
     const rating = (6.0 + Math.random() * 3.5).toFixed(1); // Random rating between 6.0-9.5
+    const imageId = 1500000000000 + Math.floor(Math.random() * 100000000);
     
-    baseMovies.push({
+    additionalMovies.push({
       id: i.toString(),
-      title: `Movie ${i}`,
-      poster: `https://images.unsplash.com/photo-${1500000000000 + Math.floor(Math.random() * 100000000)}?w=400&h=600&fit=crop`,
+      title: `${baseTitle} ${Math.floor(Math.random() * 10) + 1}`,
+      poster: `https://images.unsplash.com/photo-${imageId}?w=400&h=600&fit=crop`,
       rating: parseFloat(rating),
       year: year.toString(),
       genre: genre
     });
   }
   
-  return baseMovies;
+  return additionalMovies;
 };
 
 const additionalMovies = generateMoreMovies();
-const allMovies = [...movies, ...additionalMovies];
+export const movies = [...baseMovies, ...additionalMovies];
 
-export { allMovies as movies };
-
-export const featuredMovies = allMovies.filter(movie => movie.rating >= 8.5).slice(0, 20);
-export const actionMovies = allMovies.filter(movie => movie.genre === "Action");
-export const scifiMovies = allMovies.filter(movie => movie.genre === "Sci-Fi");
-export const recentMovies = allMovies.filter(movie => parseInt(movie.year) >= 2022).slice(0, 30);
+export const featuredMovies = movies.filter(movie => movie.rating >= 8.5).slice(0, 100);
+export const actionMovies = movies.filter(movie => movie.genre === "Action");
+export const scifiMovies = movies.filter(movie => movie.genre === "Sci-Fi");
+export const recentMovies = movies.filter(movie => parseInt(movie.year) >= 2020).slice(0, 150);
+export const dramaMovies = movies.filter(movie => movie.genre === "Drama");
+export const thrillerMovies = movies.filter(movie => movie.genre === "Thriller");
+export const comedyMovies = movies.filter(movie => movie.genre === "Comedy");
+export const horrorMovies = movies.filter(movie => movie.genre === "Horror");
+export const romanceMovies = movies.filter(movie => movie.genre === "Romance");
+export const adventureMovies = movies.filter(movie => movie.genre === "Adventure");
+export const fantasyMovies = movies.filter(movie => movie.genre === "Fantasy");
+export const mysteryMovies = movies.filter(movie => movie.genre === "Mystery");
