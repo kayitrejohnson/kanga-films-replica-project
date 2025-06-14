@@ -33,9 +33,6 @@ const Navigation = () => {
             <Link to="/genres" className="text-gray-300 hover:text-white transition-colors">
               Genres
             </Link>
-            <Link to="/admin" className="text-red-400 hover:text-red-300 transition-colors font-medium">
-              Admin
-            </Link>
           </div>
 
           {/* Search Bar */}
@@ -76,9 +73,6 @@ const Navigation = () => {
               </Link>
               <Link to="/genres" className="text-gray-300 hover:text-white transition-colors">
                 Genres
-              </Link>
-              <Link to="/admin" className="text-red-400 hover:text-red-300 transition-colors font-medium">
-                Admin
               </Link>
               <div className="relative mt-4">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
