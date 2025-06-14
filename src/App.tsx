@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import MovieDetail from "./pages/MovieDetail";
 import AdminDashboard from "./pages/AdminDashboard";
 import GenrePage from "./pages/GenrePage";
+import TranslatorPage from "./pages/TranslatorPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/movie/:id" element={<MovieDetail />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/genres/:genre" element={<GenrePage />} />
+          <Route path="/translators/:translator" element={<TranslatorPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

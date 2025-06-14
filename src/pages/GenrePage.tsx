@@ -22,7 +22,7 @@ const GenrePage = () => {
             Discover the best {genre} movies and series
           </p>
         </div>
-        <MovieGrid />
+        <MovieGrid title={`${capitalizedGenre} Movies`} movies={[]} />
       </main>
       <Footer />
     </div>

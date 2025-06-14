@@ -28,6 +28,24 @@ const Navigation = () => {
     "Crime"
   ];
 
+  const rwandanTranslators = [
+    "Jean Baptiste Nzeyimana",
+    "Marie Claire Uwimana",
+    "Vincent Rutayisire",
+    "Aline Mukamana",
+    "Paul Kagame Translator Services",
+    "Esperance Nyiramana",
+    "Claude Gatete",
+    "Immaculee Uwimana",
+    "Eric Rurangwa",
+    "Grace Mukamugema",
+    "David Nkurunziza",
+    "Josephine Mukamusoni",
+    "Antoine Rutabana",
+    "Beatrice Nyirahabimana",
+    "Samuel Niyonzima"
+  ];
+
   return (
     <nav className="bg-black/95 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,6 +82,24 @@ const Navigation = () => {
                       className="text-gray-300 hover:text-white hover:bg-gray-800 w-full px-3 py-2 cursor-pointer"
                     >
                       {genre}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-gray-300 hover:text-white transition-colors focus:outline-none">
+                Translators
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-gray-900 border-gray-700 min-w-[250px] max-h-96 overflow-y-auto">
+                {rwandanTranslators.map((translator) => (
+                  <DropdownMenuItem key={translator} asChild>
+                    <Link
+                      to={`/translators/${translator.toLowerCase().replace(/\s+/g, '-')}`}
+                      className="text-gray-300 hover:text-white hover:bg-gray-800 w-full px-3 py-2 cursor-pointer"
+                    >
+                      {translator}
                     </Link>
                   </DropdownMenuItem>
                 ))}
@@ -117,6 +153,20 @@ const Navigation = () => {
                       className="text-gray-400 hover:text-white transition-colors text-sm"
                     >
                       {genre}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div className="text-gray-300">
+                <span className="font-medium mb-2 block">Translators</span>
+                <div className="grid grid-cols-1 gap-2 ml-4 max-h-48 overflow-y-auto">
+                  {rwandanTranslators.map((translator) => (
+                    <Link
+                      key={translator}
+                      to={`/translators/${translator.toLowerCase().replace(/\s+/g, '-')}`}
+                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                    >
+                      {translator}
                     </Link>
                   ))}
                 </div>
