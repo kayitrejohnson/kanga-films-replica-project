@@ -1,11 +1,32 @@
 
-import { Search, Menu, X } from "lucide-react";
+import { Search, Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const genres = [
+    "Action",
+    "Comedy",
+    "Drama",
+    "Horror",
+    "Sci-Fi",
+    "Romance",
+    "Thriller",
+    "Adventure",
+    "Animation",
+    "Documentary",
+    "Fantasy",
+    "Crime"
+  ];
 
   return (
     <nav className="bg-black/95 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50">
@@ -30,9 +51,24 @@ const Navigation = () => {
             <Link to="/series" className="text-gray-300 hover:text-white transition-colors">
               Series
             </Link>
-            <Link to="/genres" className="text-gray-300 hover:text-white transition-colors">
-              Genres
-            </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-gray-300 hover:text-white transition-colors focus:outline-none">
+                Genres
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-gray-900 border-gray-700 min-w-[200px]">
+                {genres.map((genre) => (
+                  <DropdownMenuItem key={genre} asChild>
+                    <Link
+                      to={`/genres/${genre.toLowerCase()}`}
+                      className="text-gray-300 hover:text-white hover:bg-gray-800 w-full px-3 py-2 cursor-pointer"
+                    >
+                      {genre}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Search Bar */}
@@ -71,9 +107,20 @@ const Navigation = () => {
               <Link to="/series" className="text-gray-300 hover:text-white transition-colors">
                 Series
               </Link>
-              <Link to="/genres" className="text-gray-300 hover:text-white transition-colors">
-                Genres
-              </Link>
+              <div className="text-gray-300">
+                <span className="font-medium mb-2 block">Genres</span>
+                <div className="grid grid-cols-2 gap-2 ml-4">
+                  {genres.map((genre) => (
+                    <Link
+                      key={genre}
+                      to={`/genres/${genre.toLowerCase()}`}
+                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                    >
+                      {genre}
+                    </Link>
+                  ))}
+                </div>
+              </div>
               <div className="relative mt-4">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
