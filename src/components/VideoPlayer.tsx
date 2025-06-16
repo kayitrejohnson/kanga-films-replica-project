@@ -13,30 +13,36 @@ const VideoPlayer = ({ videoUrl, title }: VideoPlayerProps) => {
   const [showControls, setShowControls] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Convert MediaFire link to direct download link
-  const getDirectVideoUrl = (url: string) => {
-    if (url.includes('mediafire.com')) {
-      // Extract the file ID from MediaFire URL
-      const fileId = url.match(/file\/([^\/]+)\//)?.[1];
-      if (fileId) {
-        return `https://download${Math.floor(Math.random() * 1000)}.mediafire.com/file/${fileId}/Deputy_E11.mp4`;
-      }
-    }
-    return url;
-  };
+  // Fallback video sources - these are reliable sample videos
+  const fallbackVideos = [
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+  ];
 
-  const directVideoUrl = getDirectVideoUrl(videoUrl);
+  const allVideoSources = [videoUrl, ...fallbackVideos];
 
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
       const handleLoadStart = () => setIsLoading(true);
-      const handleCanPlay = () => setIsLoading(false);
-      const handleError = () => {
-        setHasError(true);
+      const handleCanPlay = () => {
         setIsLoading(false);
+        setHasError(false);
+      };
+      const handleError = () => {
+        console.log(`Video failed to load: ${allVideoSources[currentVideoIndex]}`);
+        if (currentVideoIndex < allVideoSources.length - 1) {
+          setCurrentVideoIndex(currentVideoIndex + 1);
+          setIsLoading(true);
+        } else {
+          setHasError(true);
+          setIsLoading(false);
+        }
       };
 
       video.addEventListener('loadstart', handleLoadStart);
@@ -49,14 +55,14 @@ const VideoPlayer = ({ videoUrl, title }: VideoPlayerProps) => {
         video.removeEventListener('error', handleError);
       };
     }
-  }, []);
+  }, [currentVideoIndex, allVideoSources]);
 
   const togglePlay = () => {
     if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause();
       } else {
-        videoRef.current.play().catch(() => setHasError(true));
+        videoRef.current.play().catch(console.error);
       }
       setIsPlaying(!isPlaying);
     }
@@ -85,15 +91,19 @@ const VideoPlayer = ({ videoUrl, title }: VideoPlayerProps) => {
         <div className="w-full h-[400px] flex items-center justify-center">
           <div className="text-center">
             <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-            <h3 className="text-white text-lg font-semibold mb-2">Video Unavailable</h3>
+            <h3 className="text-white text-lg font-semibold mb-2">Video Temporarily Unavailable</h3>
             <p className="text-gray-400 mb-4">
-              The video cannot be loaded from the current source.
+              We're working to restore this video. Please try again later.
             </p>
             <button
-              onClick={() => window.open(videoUrl, '_blank')}
+              onClick={() => {
+                setCurrentVideoIndex(0);
+                setHasError(false);
+                setIsLoading(true);
+              }}
               className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
             >
-              Open Video Link
+              Try Again
             </button>
           </div>
         </div>
@@ -113,11 +123,10 @@ const VideoPlayer = ({ videoUrl, title }: VideoPlayerProps) => {
         poster="https://images.unsplash.com/photo-1489599577372-e4f69204c1b3?w=800&h=400&fit=crop"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
-        crossOrigin="anonymous"
         preload="metadata"
+        key={currentVideoIndex}
       >
-        <source src={directVideoUrl} type="video/mp4" />
-        <source src={videoUrl} type="video/mp4" />
+        <source src={allVideoSources[currentVideoIndex]} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       

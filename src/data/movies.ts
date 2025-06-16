@@ -7,7 +7,7 @@ const baseMovies = [
     rating: 8.5,
     year: "2023",
     genre: "Action",
-    videoUrl: "https://www.mediafire.com/file/e9itfcozop8cmd6/Deputy_E11.mp4/file",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     backdrop: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1920&h=1080&fit=crop",
     duration: "109 min",
     description: "Robert McCall finds himself at home in Southern Italy but he discovers his friends are under the control of local crime bosses. As events turn deadly, McCall knows what he has to do: become his friends' protector by taking on the mafia.",
@@ -21,7 +21,7 @@ const baseMovies = [
     rating: 7.8,
     year: "2021",
     genre: "Action",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
     backdrop: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1920&h=1080&fit=crop",
     duration: "134 min",
     description: "Natasha Romanoff confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises.",
@@ -35,7 +35,7 @@ const baseMovies = [
     rating: 8.1,
     year: "2022",
     genre: "Action",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     backdrop: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=1920&h=1080&fit=crop",
     duration: "124 min",
     description: "Steve Rogers struggles to embrace his role in the modern world and battles a new threat from old history.",
@@ -49,7 +49,7 @@ const baseMovies = [
     rating: 7.5,
     year: "2021",
     genre: "Action",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
     backdrop: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1920&h=1080&fit=crop",
     duration: "115 min",
     description: "Thor must prevent Ragnarok, the destruction of his homeworld and the end of Asgardian civilization.",
@@ -63,7 +63,7 @@ const baseMovies = [
     rating: 7.2,
     year: "2022",
     genre: "Action",
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
     backdrop: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1920&h=1080&fit=crop",
     duration: "112 min",
     description: "A failed reporter is bonded to an alien entity, one of many symbiotes who have invaded Earth.",
@@ -92,7 +92,10 @@ const generateMoreMovies = () => {
     "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
     "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
   ];
   
   const additionalMovies = [];
