@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,7 +98,24 @@
     @apply border-border;
   }
 
+  html {
+    background-image: url('/lovable-uploads/640705e9-fd6f-4dbc-a7a5-59340e788fa9.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100%;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-transparent text-foreground;
+    background-color: rgba(0, 0, 0, 0.6);
+    background-blend-mode: overlay;
+    min-height: 100vh;
+  }
+
+  #root {
+    min-height: 100vh;
+    background: transparent;
   }
 }

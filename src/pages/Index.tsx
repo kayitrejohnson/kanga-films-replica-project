@@ -20,11 +20,11 @@ import {
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-transparent">
       <Navigation />
       <HeroSection />
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-black/40 backdrop-blur-sm">
         <MovieGrid title="Trending Now 🔥" movies={featuredMovies} />
         <MovieGrid title="Action Movies" movies={actionMovies} />
         <MovieGrid title="Sci-Fi Movies" movies={scifiMovies} />

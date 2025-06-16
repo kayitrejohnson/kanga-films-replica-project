@@ -47,17 +47,12 @@ const MovieDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-transparent">
       <Navigation />
       
       {/* Hero Section */}
       <div className="relative h-[60vh] overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.3)), url('${currentMovie.backdrop}')`
-          }}
-        />
+        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
         
         <div className="relative z-10 flex items-center h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-start space-y-6 md:space-y-0 md:space-x-8">
@@ -128,7 +123,7 @@ const MovieDetail = () => {
       
       {/* Video Player Section */}
       {showVideoPlayer && (
-        <div id="video-player-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div id="video-player-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-black/60 backdrop-blur-sm">
           <h2 className="text-white text-2xl font-bold mb-6">Watch {currentMovie.title}</h2>
           <VideoPlayer videoUrl={currentMovie.videoUrl} title={currentMovie.title} />
         </div>
@@ -136,19 +131,19 @@ const MovieDetail = () => {
       
       {/* Comments Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-gray-800 rounded-lg p-6">
+        <div className="bg-gray-800/80 backdrop-blur-sm rounded-lg p-6">
           <h3 className="text-white text-xl font-bold mb-6">Leave a Comment</h3>
           
           <div className="space-y-4 mb-6">
             <input
               type="text"
               placeholder="Enter display name"
-              className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-red-500"
+              className="w-full bg-gray-700/80 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-red-500 backdrop-blur-sm"
             />
             <textarea
               placeholder="Enter your comment message"
               rows={4}
-              className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-red-500 resize-none"
+              className="w-full bg-gray-700/80 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-red-500 resize-none backdrop-blur-sm"
             />
             <button className="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors">
               SUBMIT

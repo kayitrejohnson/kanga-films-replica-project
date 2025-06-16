@@ -4,13 +4,8 @@ import { Play, Info } from "lucide-react";
 const HeroSection = () => {
   return (
     <div className="relative h-[70vh] overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1920&h=1080&fit=crop')"
-        }}
-      />
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
       
       {/* Content */}
       <div className="relative z-10 flex items-center h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,7 +21,7 @@ const HeroSection = () => {
               <Play className="w-5 h-5" />
               <span>Play</span>
             </button>
-            <button className="bg-gray-600/80 text-white px-8 py-3 rounded-lg font-semibold flex items-center space-x-2 hover:bg-gray-600 transition-colors">
+            <button className="bg-gray-600/80 text-white px-8 py-3 rounded-lg font-semibold flex items-center space-x-2 hover:bg-gray-600 transition-colors backdrop-blur-sm">
               <Info className="w-5 h-5" />
               <span>More Info</span>
             </button>
