@@ -1,4 +1,3 @@
-
 // Action Movies
 const baseMovies = [
   {
@@ -7,7 +6,13 @@ const baseMovies = [
     poster: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=600&fit=crop",
     rating: 8.5,
     year: "2023",
-    genre: "Action"
+    genre: "Action",
+    videoUrl: "https://www.mediafire.com/file/e9itfcozop8cmd6/Deputy_E11.mp4/file",
+    backdrop: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1920&h=1080&fit=crop",
+    duration: "109 min",
+    description: "Robert McCall finds himself at home in Southern Italy but he discovers his friends are under the control of local crime bosses. As events turn deadly, McCall knows what he has to do: become his friends' protector by taking on the mafia.",
+    director: "Antoine Fuqua",
+    cast: ["Denzel Washington", "Dakota Fanning", "Eugenio Mastrandrea"]
   },
   {
     id: "2",
@@ -15,7 +20,13 @@ const baseMovies = [
     poster: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=400&h=600&fit=crop",
     rating: 7.8,
     year: "2021",
-    genre: "Action"
+    genre: "Action",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    backdrop: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1920&h=1080&fit=crop",
+    duration: "134 min",
+    description: "Natasha Romanoff confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises.",
+    director: "Cate Shortland",
+    cast: ["Scarlett Johansson", "Florence Pugh", "David Harbour"]
   },
   {
     id: "3",
@@ -23,7 +34,13 @@ const baseMovies = [
     poster: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=600&fit=crop",
     rating: 8.1,
     year: "2022",
-    genre: "Action"
+    genre: "Action",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    backdrop: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=1920&h=1080&fit=crop",
+    duration: "124 min",
+    description: "Steve Rogers struggles to embrace his role in the modern world and battles a new threat from old history.",
+    director: "Russo Brothers",
+    cast: ["Chris Evans", "Scarlett Johansson", "Sebastian Stan"]
   },
   {
     id: "4",
@@ -31,7 +48,13 @@ const baseMovies = [
     poster: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=600&fit=crop",
     rating: 7.5,
     year: "2021",
-    genre: "Action"
+    genre: "Action",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    backdrop: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1920&h=1080&fit=crop",
+    duration: "115 min",
+    description: "Thor must prevent Ragnarok, the destruction of his homeworld and the end of Asgardian civilization.",
+    director: "Taika Waititi",
+    cast: ["Chris Hemsworth", "Cate Blanchett", "Tom Hiddleston"]
   },
   {
     id: "5",
@@ -39,253 +62,13 @@ const baseMovies = [
     poster: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=400&h=600&fit=crop",
     rating: 7.2,
     year: "2022",
-    genre: "Action"
-  },
-  {
-    id: "6",
-    title: "Avengers",
-    poster: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=600&fit=crop",
-    rating: 8.9,
-    year: "2022",
-    genre: "Action"
-  },
-  {
-    id: "7",
-    title: "Iron Man",
-    poster: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=600&fit=crop",
-    rating: 8.3,
-    year: "2023",
-    genre: "Action"
-  },
-  {
-    id: "8",
-    title: "Spider-Man",
-    poster: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=400&h=600&fit=crop",
-    rating: 8.7,
-    year: "2023",
-    genre: "Action"
-  },
-  {
-    id: "9",
-    title: "Fast & Furious",
-    poster: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=600&fit=crop",
-    rating: 7.9,
-    year: "2023",
-    genre: "Action"
-  },
-  {
-    id: "10",
-    title: "John Wick",
-    poster: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=600&fit=crop",
-    rating: 9.1,
-    year: "2023",
-    genre: "Action"
-  },
-  {
-    id: "11",
-    title: "Mission Impossible",
-    poster: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=600&fit=crop",
-    rating: 8.6,
-    year: "2023",
-    genre: "Action"
-  },
-  {
-    id: "12",
-    title: "The Batman",
-    poster: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=400&h=600&fit=crop",
-    rating: 8.4,
-    year: "2022",
-    genre: "Action"
-  },
-  {
-    id: "13",
-    title: "Wonder Woman",
-    poster: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=600&fit=crop",
-    rating: 8.2,
-    year: "2022",
-    genre: "Action"
-  },
-  {
-    id: "14",
-    title: "Aquaman",
-    poster: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=600&fit=crop",
-    rating: 7.6,
-    year: "2023",
-    genre: "Action"
-  },
-  {
-    id: "15",
-    title: "Deadpool",
-    poster: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=600&fit=crop",
-    rating: 8.8,
-    year: "2023",
-    genre: "Action"
-  },
-
-  // Sci-Fi Movies
-  {
-    id: "16",
-    title: "Matrix Reloaded",
-    poster: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=600&fit=crop",
-    rating: 9.2,
-    year: "2003",
-    genre: "Sci-Fi"
-  },
-  {
-    id: "17",
-    title: "The Terminator",
-    poster: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=600&fit=crop",
-    rating: 9.0,
-    year: "1984",
-    genre: "Sci-Fi"
-  },
-  {
-    id: "18",
-    title: "Blade Runner 2049",
-    poster: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=400&h=600&fit=crop",
-    rating: 8.9,
-    year: "2017",
-    genre: "Sci-Fi"
-  },
-  {
-    id: "19",
-    title: "Interstellar",
-    poster: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=600&fit=crop",
-    rating: 9.3,
-    year: "2014",
-    genre: "Sci-Fi"
-  },
-  {
-    id: "20",
-    title: "Star Wars",
-    poster: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=600&fit=crop",
-    rating: 9.1,
-    year: "2023",
-    genre: "Sci-Fi"
-  },
-  {
-    id: "21",
-    title: "Guardians of Galaxy",
-    poster: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=600&fit=crop",
-    rating: 8.5,
-    year: "2023",
-    genre: "Sci-Fi"
-  },
-  {
-    id: "22",
-    title: "Avatar",
-    poster: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=400&h=600&fit=crop",
-    rating: 8.7,
-    year: "2022",
-    genre: "Sci-Fi"
-  },
-  {
-    id: "23",
-    title: "Dune",
-    poster: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=600&fit=crop",
-    rating: 8.6,
-    year: "2021",
-    genre: "Sci-Fi"
-  },
-  {
-    id: "24",
-    title: "Alien",
-    poster: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=600&fit=crop",
-    rating: 8.8,
-    year: "2023",
-    genre: "Sci-Fi"
-  },
-  {
-    id: "25",
-    title: "Ex Machina",
-    poster: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=600&fit=crop",
-    rating: 8.4,
-    year: "2015",
-    genre: "Sci-Fi"
-  },
-
-  // Drama Movies
-  {
-    id: "26",
-    title: "Vikings",
-    poster: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?w=400&h=600&fit=crop",
-    rating: 8.8,
-    year: "2023",
-    genre: "Drama"
-  },
-  {
-    id: "27",
-    title: "The Crown",
-    poster: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=600&fit=crop",
-    rating: 8.9,
-    year: "2023",
-    genre: "Drama"
-  },
-  {
-    id: "28",
-    title: "Breaking Bad",
-    poster: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=400&h=600&fit=crop",
-    rating: 9.5,
-    year: "2022",
-    genre: "Drama"
-  },
-  {
-    id: "29",
-    title: "The Godfather",
-    poster: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=600&fit=crop",
-    rating: 9.6,
-    year: "1972",
-    genre: "Drama"
-  },
-  {
-    id: "30",
-    title: "Shawshank Redemption",
-    poster: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=600&fit=crop",
-    rating: 9.7,
-    year: "1994",
-    genre: "Drama"
-  },
-
-  // Thriller Movies
-  {
-    id: "31",
-    title: "Vivarium",
-    poster: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?w=400&h=600&fit=crop",
-    rating: 6.9,
-    year: "2019",
-    genre: "Thriller"
-  },
-  {
-    id: "32",
-    title: "Gone Girl",
-    poster: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=600&fit=crop",
-    rating: 8.1,
-    year: "2014",
-    genre: "Thriller"
-  },
-  {
-    id: "33",
-    title: "Se7en",
-    poster: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=400&h=600&fit=crop",
-    rating: 8.6,
-    year: "1995",
-    genre: "Thriller"
-  },
-  {
-    id: "34",
-    title: "Zodiac",
-    poster: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&h=600&fit=crop",
-    rating: 7.7,
-    year: "2007",
-    genre: "Thriller"
-  },
-  {
-    id: "35",
-    title: "The Silence of the Lambs",
-    poster: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=600&fit=crop",
-    rating: 8.6,
-    year: "1991",
-    genre: "Thriller"
+    genre: "Action",
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    backdrop: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1920&h=1080&fit=crop",
+    duration: "112 min",
+    description: "A failed reporter is bonded to an alien entity, one of many symbiotes who have invaded Earth.",
+    director: "Ruben Fleischer",
+    cast: ["Tom Hardy", "Michelle Williams", "Riz Ahmed"]
   }
 ];
 
@@ -304,14 +87,24 @@ const generateMoreMovies = () => {
     "Stranger Things", "The Witcher", "Mandalorian", "House of the Dragon", "Rings of Power"
   ];
   
+  const sampleVideos = [
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+  ];
+  
   const additionalMovies = [];
   
-  for (let i = 36; i <= 1200; i++) {
+  for (let i = 6; i <= 1200; i++) {
     const genre = genres[Math.floor(Math.random() * genres.length)];
     const baseTitle = movieTitles[Math.floor(Math.random() * movieTitles.length)];
-    const year = 2010 + Math.floor(Math.random() * 14); // Random year between 2010-2023
-    const rating = (6.0 + Math.random() * 3.5).toFixed(1); // Random rating between 6.0-9.5
+    const year = 2010 + Math.floor(Math.random() * 14);
+    const rating = (6.0 + Math.random() * 3.5).toFixed(1);
     const imageId = 1500000000000 + Math.floor(Math.random() * 100000000);
+    const videoUrl = sampleVideos[Math.floor(Math.random() * sampleVideos.length)];
+    const duration = `${90 + Math.floor(Math.random() * 60)} min`;
     
     additionalMovies.push({
       id: i.toString(),
@@ -319,7 +112,13 @@ const generateMoreMovies = () => {
       poster: `https://images.unsplash.com/photo-${imageId}?w=400&h=600&fit=crop`,
       rating: parseFloat(rating),
       year: year.toString(),
-      genre: genre
+      genre: genre,
+      videoUrl: videoUrl,
+      backdrop: `https://images.unsplash.com/photo-${imageId}?w=1920&h=1080&fit=crop`,
+      duration: duration,
+      description: `An epic ${genre.toLowerCase()} movie that delivers thrilling entertainment and unforgettable moments.`,
+      director: "Various Directors",
+      cast: ["Star Actor", "Supporting Actor", "Featured Actor"]
     });
   }
   

@@ -4,27 +4,32 @@ import { Play, Download, Star, Calendar, Clock } from "lucide-react";
 import Navigation from "../components/Navigation";
 import VideoPlayer from "../components/VideoPlayer";
 import { useState } from "react";
+import { movies } from "../data/movies";
 
 const MovieDetail = () => {
   const { id } = useParams();
   const [showVideoPlayer, setShowVideoPlayer] = useState(false);
 
-  // Sample movie data - in a real app this would come from an API
-  const movie = {
+  // Find the movie by ID from the movies data
+  const movie = movies.find(m => m.id === id);
+
+  // Fallback movie data if not found
+  const defaultMovie = {
     id: "1",
-    title: "The Equalizer 3",
+    title: "Movie Not Found",
     poster: "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=600&fit=crop",
     backdrop: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1920&h=1080&fit=crop",
-    rating: 8.5,
+    rating: 0,
     year: "2023",
-    genre: "Action",
-    duration: "109 min",
-    description: "Robert McCall finds himself at home in Southern Italy but he discovers his friends are under the control of local crime bosses. As events turn deadly, McCall knows what he has to do: become his friends' protector by taking on the mafia.",
-    director: "Antoine Fuqua",
-    cast: ["Denzel Washington", "Dakota Fanning", "Eugenio Mastrandrea"]
+    genre: "Unknown",
+    duration: "0 min",
+    description: "This movie could not be found in our database.",
+    director: "Unknown",
+    cast: ["Unknown"],
+    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
   };
 
-  const videoUrl = "https://www.mediafire.com/file/e9itfcozop8cmd6/Deputy_E11.mp4/file";
+  const currentMovie = movie || defaultMovie;
 
   const handleWatchMovie = () => {
     setShowVideoPlayer(true);
@@ -38,7 +43,7 @@ const MovieDetail = () => {
   };
 
   const handleDownload = () => {
-    window.open(videoUrl, '_blank');
+    window.open(currentMovie.videoUrl, '_blank');
   };
 
   return (
@@ -50,7 +55,7 @@ const MovieDetail = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.3)), url('${movie.backdrop}')`
+            backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.3)), url('${currentMovie.backdrop}')`
           }}
         />
         
@@ -58,37 +63,37 @@ const MovieDetail = () => {
           <div className="flex flex-col md:flex-row items-start space-y-6 md:space-y-0 md:space-x-8">
             {/* Movie Poster */}
             <img
-              src={movie.poster}
-              alt={movie.title}
+              src={currentMovie.poster}
+              alt={currentMovie.title}
               className="w-64 h-96 object-cover rounded-lg shadow-2xl"
             />
             
             {/* Movie Info */}
             <div className="flex-1">
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                {movie.title}
+                {currentMovie.title}
               </h1>
               
               <div className="flex items-center space-x-6 mb-4">
                 <div className="flex items-center space-x-1">
                   <Star className="w-5 h-5 text-yellow-400 fill-current" />
-                  <span className="text-white font-semibold">{movie.rating}</span>
+                  <span className="text-white font-semibold">{currentMovie.rating}</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <Calendar className="w-5 h-5 text-gray-400" />
-                  <span className="text-gray-300">{movie.year}</span>
+                  <span className="text-gray-300">{currentMovie.year}</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <Clock className="w-5 h-5 text-gray-400" />
-                  <span className="text-gray-300">{movie.duration}</span>
+                  <span className="text-gray-300">{currentMovie.duration}</span>
                 </div>
                 <span className="bg-red-600 text-white px-3 py-1 rounded text-sm font-semibold">
-                  {movie.genre}
+                  {currentMovie.genre}
                 </span>
               </div>
               
               <p className="text-gray-200 text-lg mb-6 max-w-2xl">
-                {movie.description}
+                {currentMovie.description}
               </p>
               
               <div className="flex items-center space-x-4 mb-6">
@@ -110,10 +115,10 @@ const MovieDetail = () => {
               
               <div className="space-y-2">
                 <p className="text-gray-300">
-                  <span className="text-white font-semibold">Director:</span> {movie.director}
+                  <span className="text-white font-semibold">Director:</span> {currentMovie.director}
                 </p>
                 <p className="text-gray-300">
-                  <span className="text-white font-semibold">Cast:</span> {movie.cast.join(", ")}
+                  <span className="text-white font-semibold">Cast:</span> {Array.isArray(currentMovie.cast) ? currentMovie.cast.join(", ") : currentMovie.cast}
                 </p>
               </div>
             </div>
@@ -124,8 +129,8 @@ const MovieDetail = () => {
       {/* Video Player Section */}
       {showVideoPlayer && (
         <div id="video-player-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h2 className="text-white text-2xl font-bold mb-6">Watch {movie.title}</h2>
-          <VideoPlayer videoUrl={videoUrl} title={movie.title} />
+          <h2 className="text-white text-2xl font-bold mb-6">Watch {currentMovie.title}</h2>
+          <VideoPlayer videoUrl={currentMovie.videoUrl} title={currentMovie.title} />
         </div>
       )}
       
