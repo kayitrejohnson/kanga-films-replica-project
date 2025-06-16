@@ -18,22 +18,29 @@ interface MovieCardProps {
 
 const MovieCard = ({ movie }: MovieCardProps) => {
   const [showVideo, setShowVideo] = useState(false);
-  const videoUrl = "https://www.mediafire.com/file/e9itfcozop8cmd6/Deputy_E11.mp4/file";
+  const [videoError, setVideoError] = useState(false);
+  
+  // Use a sample video URL that's more likely to work for preview
+  const videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
 
   return (
     <Link to={`/movie/${movie.id}`} className="group block">
       <div 
         className="relative overflow-hidden rounded-lg bg-gray-900 transition-transform duration-300 hover:scale-105"
         onMouseEnter={() => setShowVideo(true)}
-        onMouseLeave={() => setShowVideo(false)}
+        onMouseLeave={() => {
+          setShowVideo(false);
+          setVideoError(false);
+        }}
       >
-        {showVideo ? (
+        {showVideo && !videoError ? (
           <video
             autoPlay
             muted
             loop
             className="w-full aspect-[3/4] object-cover"
             poster={movie.poster}
+            onError={() => setVideoError(true)}
           >
             <source src={videoUrl} type="video/mp4" />
           </video>

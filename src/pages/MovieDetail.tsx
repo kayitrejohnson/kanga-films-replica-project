@@ -3,9 +3,11 @@ import { useParams } from "react-router-dom";
 import { Play, Download, Star, Calendar, Clock } from "lucide-react";
 import Navigation from "../components/Navigation";
 import VideoPlayer from "../components/VideoPlayer";
+import { useState } from "react";
 
 const MovieDetail = () => {
   const { id } = useParams();
+  const [showVideoPlayer, setShowVideoPlayer] = useState(false);
 
   // Sample movie data - in a real app this would come from an API
   const movie = {
@@ -23,6 +25,21 @@ const MovieDetail = () => {
   };
 
   const videoUrl = "https://www.mediafire.com/file/e9itfcozop8cmd6/Deputy_E11.mp4/file";
+
+  const handleWatchMovie = () => {
+    setShowVideoPlayer(true);
+    // Scroll to video player
+    setTimeout(() => {
+      const videoElement = document.getElementById('video-player-section');
+      if (videoElement) {
+        videoElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
+  const handleDownload = () => {
+    window.open(videoUrl, '_blank');
+  };
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -75,11 +92,17 @@ const MovieDetail = () => {
               </p>
               
               <div className="flex items-center space-x-4 mb-6">
-                <button className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold flex items-center space-x-2 hover:bg-red-700 transition-colors">
+                <button 
+                  onClick={handleWatchMovie}
+                  className="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold flex items-center space-x-2 hover:bg-red-700 transition-colors"
+                >
                   <Play className="w-5 h-5" />
                   <span>Watch Movie</span>
                 </button>
-                <button className="bg-gray-600/80 text-white px-8 py-3 rounded-lg font-semibold flex items-center space-x-2 hover:bg-gray-600 transition-colors">
+                <button 
+                  onClick={handleDownload}
+                  className="bg-gray-600/80 text-white px-8 py-3 rounded-lg font-semibold flex items-center space-x-2 hover:bg-gray-600 transition-colors"
+                >
                   <Download className="w-5 h-5" />
                   <span>Download</span>
                 </button>
@@ -99,10 +122,12 @@ const MovieDetail = () => {
       </div>
       
       {/* Video Player Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h2 className="text-white text-2xl font-bold mb-6">Watch {movie.title}</h2>
-        <VideoPlayer videoUrl={videoUrl} title={movie.title} />
-      </div>
+      {showVideoPlayer && (
+        <div id="video-player-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <h2 className="text-white text-2xl font-bold mb-6">Watch {movie.title}</h2>
+          <VideoPlayer videoUrl={videoUrl} title={movie.title} />
+        </div>
+      )}
       
       {/* Comments Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
