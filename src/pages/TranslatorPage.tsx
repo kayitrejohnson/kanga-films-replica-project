@@ -2,14 +2,17 @@
 import { useParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Play, Download, Star, Clock, Calendar } from "lucide-react";
+import { Play, Download, Star, Clock, Calendar, MessageCircle, User, FileText } from "lucide-react";
 import { movies } from "@/data/movies";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
 
 const TranslatorPage = () => {
   const { translator } = useParams<{ translator: string }>();
   const [selectedGenre, setSelectedGenre] = useState<string>("All");
+  const { toast } = useToast();
   
   // Convert URL slug back to readable name
   const translatorName = translator?.split('-').map(word => 
@@ -26,6 +29,34 @@ const TranslatorPage = () => {
   const filteredMovies = selectedGenre === "All" 
     ? translatorMovies 
     : translatorMovies.filter(movie => movie.genre === selectedGenre);
+
+  const handleStartProject = () => {
+    toast({
+      title: "Translation Project Started",
+      description: `Starting a new translation project with ${translatorName}. You will be contacted shortly.`,
+    });
+  };
+
+  const handleViewPortfolio = () => {
+    toast({
+      title: "Portfolio Loading",
+      description: `Loading ${translatorName}'s complete portfolio and previous work samples.`,
+    });
+  };
+
+  const handleContactTranslator = () => {
+    toast({
+      title: "Contact Request Sent",
+      description: `Your contact request has been sent to ${translatorName}. They will respond within 24 hours.`,
+    });
+  };
+
+  const handleTranslateMovie = (movieTitle: string) => {
+    toast({
+      title: "Translation Request",
+      description: `Translation request for "${movieTitle}" has been sent to ${translatorName}.`,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -164,11 +195,7 @@ const TranslatorPage = () => {
           {/* Movies Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {filteredMovies.map((movie) => (
-              <Link
-                key={movie.id}
-                to={`/movie/${movie.id}`}
-                className="group block"
-              >
+              <div key={movie.id} className="group block">
                 <div className="relative overflow-hidden rounded-lg bg-gray-900 transition-transform duration-300 hover:scale-105">
                   <img
                     src={movie.poster}
@@ -178,9 +205,21 @@ const TranslatorPage = () => {
                   
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <div className="text-center">
-                      <Play className="w-8 h-8 text-white mx-auto mb-1" />
-                      <p className="text-white font-semibold text-xs">Translate</p>
+                    <div className="text-center space-y-2">
+                      <button
+                        onClick={() => handleTranslateMovie(movie.title)}
+                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center space-x-2"
+                      >
+                        <Play className="w-4 h-4" />
+                        <span>Translate</span>
+                      </button>
+                      <Link
+                        to={`/movie/${movie.id}`}
+                        className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center space-x-2"
+                      >
+                        <FileText className="w-4 h-4" />
+                        <span>View Details</span>
+                      </Link>
                     </div>
                   </div>
 
@@ -214,7 +253,7 @@ const TranslatorPage = () => {
                     <span className="text-gray-500 text-xs">{movie.genre}</span>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
@@ -226,15 +265,29 @@ const TranslatorPage = () => {
             {translatorName} is available for immediate movie translation projects with full access to all movie content and parts.
           </p>
           <div className="flex flex-wrap gap-4">
-            <button className="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+            <Button 
+              onClick={handleStartProject}
+              className="bg-red-600 text-white hover:bg-red-700"
+            >
+              <Play className="w-4 h-4 mr-2" />
               Start Translation Project
-            </button>
-            <button className="bg-gray-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
+            </Button>
+            <Button 
+              onClick={handleViewPortfolio}
+              variant="secondary"
+              className="bg-gray-600 text-white hover:bg-gray-700"
+            >
+              <User className="w-4 h-4 mr-2" />
               View Portfolio
-            </button>
-            <button className="border border-gray-600 text-gray-300 px-6 py-2 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
+            </Button>
+            <Button 
+              onClick={handleContactTranslator}
+              variant="outline"
+              className="border-gray-600 text-gray-300 hover:bg-gray-700"
+            >
+              <MessageCircle className="w-4 h-4 mr-2" />
               Contact Translator
-            </button>
+            </Button>
           </div>
         </div>
       </main>
