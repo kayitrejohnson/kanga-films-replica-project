@@ -2,15 +2,30 @@
 import { useParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Play, Download, Star } from "lucide-react";
+import { Play, Download, Star, Clock, Calendar } from "lucide-react";
+import { movies } from "@/data/movies";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const TranslatorPage = () => {
   const { translator } = useParams<{ translator: string }>();
+  const [selectedGenre, setSelectedGenre] = useState<string>("All");
   
   // Convert URL slug back to readable name
   const translatorName = translator?.split('-').map(word => 
     word.charAt(0).toUpperCase() + word.slice(1)
   ).join(' ') || "Unknown Translator";
+
+  // Get translator's available movies (all movies since they have complete access)
+  const translatorMovies = movies.slice(0, 24); // Show first 24 movies for better performance
+  
+  // Get unique genres for filtering
+  const genres = ["All", ...Array.from(new Set(translatorMovies.map(movie => movie.genre)))];
+  
+  // Filter movies by selected genre
+  const filteredMovies = selectedGenre === "All" 
+    ? translatorMovies 
+    : translatorMovies.filter(movie => movie.genre === selectedGenre);
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -25,7 +40,7 @@ const TranslatorPage = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* Translator Profile */}
           <div className="bg-gray-800 rounded-lg p-6">
             <h2 className="text-xl font-semibold text-white mb-4">About {translatorName}</h2>
@@ -118,8 +133,94 @@ const TranslatorPage = () => {
           </div>
         </div>
 
+        {/* Available Movies Section */}
+        <div className="bg-gray-800 rounded-lg p-6 mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-white">Available Movies</h2>
+            <span className="text-gray-400 text-sm">
+              {filteredMovies.length} movies available
+            </span>
+          </div>
+          
+          {/* Genre Filter */}
+          <div className="mb-6">
+            <div className="flex flex-wrap gap-2">
+              {genres.map((genre) => (
+                <button
+                  key={genre}
+                  onClick={() => setSelectedGenre(genre)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    selectedGenre === genre
+                      ? 'bg-red-600 text-white'
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  }`}
+                >
+                  {genre}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Movies Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {filteredMovies.map((movie) => (
+              <Link
+                key={movie.id}
+                to={`/movie/${movie.id}`}
+                className="group block"
+              >
+                <div className="relative overflow-hidden rounded-lg bg-gray-900 transition-transform duration-300 hover:scale-105">
+                  <img
+                    src={movie.poster}
+                    alt={movie.title}
+                    className="w-full aspect-[3/4] object-cover transition-opacity duration-300 group-hover:opacity-80"
+                  />
+                  
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="text-center">
+                      <Play className="w-8 h-8 text-white mx-auto mb-1" />
+                      <p className="text-white font-semibold text-xs">Translate</p>
+                    </div>
+                  </div>
+
+                  {/* Rating Badge */}
+                  <div className="absolute top-2 right-2 bg-black/80 rounded-full px-2 py-1 flex items-center space-x-1">
+                    <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                    <span className="text-white text-xs font-medium">{movie.rating}</span>
+                  </div>
+
+                  {/* Translation Status */}
+                  <div className="absolute top-2 left-2 bg-green-600 rounded-full px-2 py-1">
+                    <span className="text-white text-xs font-medium">Available</span>
+                  </div>
+                </div>
+                
+                <div className="mt-3">
+                  <h3 className="text-white font-semibold text-sm group-hover:text-red-400 transition-colors line-clamp-2">
+                    {movie.title}
+                  </h3>
+                  <div className="flex items-center justify-between mt-1">
+                    <div className="flex items-center space-x-1">
+                      <Calendar className="w-3 h-3 text-gray-400" />
+                      <span className="text-gray-400 text-xs">{movie.year}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Clock className="w-3 h-3 text-gray-400" />
+                      <span className="text-gray-400 text-xs">{movie.duration}</span>
+                    </div>
+                  </div>
+                  <div className="mt-1">
+                    <span className="text-gray-500 text-xs">{movie.genre}</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* Contact & Work Section */}
-        <div className="mt-8 bg-gray-800 rounded-lg p-6">
+        <div className="bg-gray-800 rounded-lg p-6">
           <h2 className="text-xl font-semibold text-white mb-4">Ready to Work</h2>
           <p className="text-gray-300 mb-4">
             {translatorName} is available for immediate movie translation projects with full access to all movie content and parts.
