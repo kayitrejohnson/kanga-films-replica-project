@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import SeriesGrid from "@/components/SeriesGrid";
 import { series } from "@/data/series";
 import { Button } from "@/components/ui/button";
-import { Search, Filter, Tv } from "lucide-react";
+import { Search, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 const SeriesPage = () => {
@@ -19,7 +19,7 @@ const SeriesPage = () => {
   // Filter and sort series
   let filteredSeries = series.filter(show => 
     show.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (selectedGenre === "All" || show.genre.includes(selectedGenre))
+    (selectedGenre === "All" || show.genre === selectedGenre)
   );
 
   // Sort series
@@ -31,8 +31,6 @@ const SeriesPage = () => {
         return parseInt(b.year.split('-')[1]) - parseInt(a.year.split('-')[1]);
       case "title":
         return a.title.localeCompare(b.title);
-      case "seasons":
-        return b.seasons - a.seasons;
       default:
         return 0;
     }
@@ -44,12 +42,9 @@ const SeriesPage = () => {
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <div className="flex items-center space-x-3 mb-4">
-            <Tv className="w-8 h-8 text-red-600" />
-            <h1 className="text-4xl font-bold text-white">TV Series & Shows</h1>
-          </div>
+          <h1 className="text-4xl font-bold text-white mb-4">All TV Series</h1>
           <p className="text-gray-400 text-lg">
-            Explore hundreds of TV series with professional translation services
+            Discover thousands of TV series with complete translation services
           </p>
         </div>
 
@@ -93,7 +88,6 @@ const SeriesPage = () => {
                 <option value="rating">Rating</option>
                 <option value="year">Year</option>
                 <option value="title">Title</option>
-                <option value="seasons">Seasons</option>
               </select>
             </div>
           </div>
@@ -113,4 +107,3 @@ const SeriesPage = () => {
 };
 
 export default SeriesPage;
-
