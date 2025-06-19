@@ -1,4 +1,3 @@
-
 import { useParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -151,16 +150,17 @@ const TranslatorPage = () => {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
 
-            <div className="mt-6">
-              <h3 className="text-lg font-medium text-white mb-3">Languages Expertise</h3>
-              <div className="grid grid-cols-2 gap-2">
-                <span className="bg-red-600 text-white px-3 py-1 rounded text-sm text-center">Kinyarwanda</span>
-                <span className="bg-blue-600 text-white px-3 py-1 rounded text-sm text-center">English</span>
-                <span className="bg-green-600 text-white px-3 py-1 rounded text-sm text-center">French</span>
-                <span className="bg-purple-600 text-white px-3 py-1 rounded text-sm text-center">Swahili</span>
-              </div>
-            </div>
+        {/* Languages Expertise Section - Moved Here */}
+        <div className="bg-gray-800 rounded-lg p-6 mb-8">
+          <h2 className="text-xl font-semibold text-white mb-4">Languages Expertise</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <span className="bg-red-600 text-white px-4 py-3 rounded-lg text-sm text-center font-medium">Kinyarwanda</span>
+            <span className="bg-blue-600 text-white px-4 py-3 rounded-lg text-sm text-center font-medium">English</span>
+            <span className="bg-green-600 text-white px-4 py-3 rounded-lg text-sm text-center font-medium">French</span>
+            <span className="bg-purple-600 text-white px-4 py-3 rounded-lg text-sm text-center font-medium">Swahili</span>
           </div>
         </div>
 
