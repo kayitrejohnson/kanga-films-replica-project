@@ -21,7 +21,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
   const [videoError, setVideoError] = useState(false);
   
   // Use a sample video URL that's more likely to work for preview
-  const videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+  const videoUrl = "/lovable-uploads/videos/default-movie-trailer.mp4";
 
   return (
     <Link to={`/movie/${movie.id}`} className="group block">

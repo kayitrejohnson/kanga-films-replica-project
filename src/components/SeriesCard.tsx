@@ -22,7 +22,7 @@ const SeriesCard = ({ series }: SeriesCardProps) => {
   const [showVideo, setShowVideo] = useState(false);
   const [videoError, setVideoError] = useState(false);
   
-  const videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+  const videoUrl = "/lovable-uploads/videos/default-trailer.mp4";
 
   return (
     <Link to={`/series/${series.id}`} className="group block">
